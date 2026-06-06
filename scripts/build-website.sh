@@ -9,8 +9,10 @@ OUTPUT_DIR="$REPO_ROOT/website"
 INDEX_FILE="$OUTPUT_DIR/index.html"
 OUTPUT_COVER="$OUTPUT_DIR/cover.png"
 OUTPUT_PDF="$OUTPUT_DIR/There Is No They.pdf"
+OUTPUT_EPUB="$OUTPUT_DIR/There Is No They.epub"
 SOURCE_COVER="$REPO_ROOT/cover.png"
 SOURCE_PDF="$REPO_ROOT/There Is No They.pdf"
+SOURCE_EPUB="$REPO_ROOT/There Is No They.epub"
 
 require_file() {
     if [ ! -f "$1" ]; then
@@ -137,6 +139,7 @@ excerpt_to_html() {
 require_file "$MANUSCRIPT_FILE"
 require_file "$SOURCE_COVER"
 require_file "$SOURCE_PDF"
+require_file "$SOURCE_EPUB"
 
 TMP_DIR="$(mktemp -d)"
 trap 'rm -rf "$TMP_DIR"' EXIT
@@ -158,6 +161,7 @@ mkdir -p "$OUTPUT_DIR"
 
 cp "$SOURCE_COVER" "$OUTPUT_COVER"
 cp "$SOURCE_PDF" "$OUTPUT_PDF"
+cp "$SOURCE_EPUB" "$OUTPUT_EPUB"
 
 cat > "$INDEX_FILE" <<'EOF'
 <!DOCTYPE html>
@@ -856,6 +860,7 @@ cat > "$INDEX_FILE" <<'EOF'
                 <nav class="site-header__links" aria-label="External links">
                     <a href="#preview">Chapter 1</a>
                     <a href="There Is No They.pdf">PDF</a>
+                    <a href="There Is No They.epub">EPUB</a>
                     <a href="https://github.com/joshSzep/there-is-no-they" target="_blank" rel="noreferrer">GitHub</a>
                     <a href="https://joshszep.com" target="_blank" rel="noreferrer">Author Site</a>
                 </nav>
@@ -936,10 +941,11 @@ cat >> "$INDEX_FILE" <<'EOF'
                     <div class="download__copy">
                         <div class="eyebrow">Download</div>
                         <h2>A book about what cannot be carried intact.</h2>
-                        <p>Read the full novel as a free PDF. No mailing list. No funnel. Just the work itself, offered into the distance.</p>
+                        <p>Read the full novel as a free PDF or EPUB. No mailing list. No funnel. Just the work itself, offered into the distance.</p>
                         <p>The page is quiet on purpose. The book is not asking to be optimized. It is asking to be encountered.</p>
                         <div class="download__actions">
-                            <a class="button" href="There Is No They.pdf" download>Download the Book (Free PDF)</a>
+                            <a class="button" href="There Is No They.pdf" download>Download PDF</a>
+                            <a class="button" href="There Is No They.epub" download>Download EPUB</a>
                         </div>
                     </div>
                 </div>
@@ -1021,4 +1027,4 @@ EOF
 
 echo "Website built: $OUTPUT_DIR"
 echo "Entry point: $INDEX_FILE"
-echo "Assets: $OUTPUT_COVER, $OUTPUT_PDF"
+echo "Assets: $OUTPUT_COVER, $OUTPUT_PDF, $OUTPUT_EPUB"
