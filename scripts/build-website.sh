@@ -175,6 +175,8 @@ cat > "$INDEX_FILE" <<'EOF'
     <meta property="og:description" content="A quiet, unsettling literary science fiction novel about alien signals, failed translation, and the cost of seeing.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="cover.png">
+    <link rel="icon" type="image/png" href="cover.png">
+    <link rel="apple-touch-icon" href="cover.png">
     <link rel="preload" href="cover.png" as="image">
     <style>
         :root {
